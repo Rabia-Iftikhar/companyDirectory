@@ -1,0 +1,527 @@
+/*preloader*/
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    z-index: 100;
+}
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #9370DB;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #BA55D3;
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #FF00FF;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
+/*Web page */
+
+
+body {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-position: center; 
+    background-repeat: repeat; 
+    background-size: cover;
+}
+
+
+#scrollBack {
+    position: fixed;
+    bottom: 30px;
+    left: 40px;
+    display: none;
+    z-index: 100;
+}
+
+
+/*       navbar        */
+
+#companynav {
+    background-color: #eeeee4;
+    height: 80px;
+}
+
+a.pageTitle {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: #000;
+}
+.input-group {
+    width: 450px;
+}
+/*         tools section        */
+
+#toolsDiv {
+    overflow-x: hidden;
+    background-color: black;
+}
+
+#toolsDiv .selectForTable select   {
+    border-radius: 5px;
+}
+
+#toolsDiv {
+    background-color: black;
+    border-bottom: 10px solid rgb(82, 85, 87);
+    padding-bottom: 20px !important;
+    padding-top: 20px !important;
+    
+}
+
+
+/*    table      */
+
+table th, tr {
+    cursor: pointer;
+}
+
+table thead th { 
+    position: sticky; 
+    top: 0; 
+    z-index: 1;
+}
+
+
+/*    modals    */
+
+.headerForModal {
+    width: 100%;
+    text-align: center;
+}
+
+
+.modalFooterIcon {
+    font-size: 24px;
+}
+
+.modalFooterBtn {
+    width: 50px;
+}
+
+/*       modal add person       */
+
+ #addPerson span, #addPerson label{
+    width: 150px;
+}
+
+
+/*       modal edit person       */
+
+#editPerson span, #editPerson label {
+    width: 150px;
+}
+
+
+
+/*       modal edit departments       */
+
+
+#departmentModal .modal-content .modal-body{
+    height: 270px;
+}
+
+
+#insertDepartment span, #editDepartment span {
+    width: 150px;
+}
+
+#insertDepartment label, #editDepartment label, #deleteDepartment label {
+    width: 150px;
+}
+
+#insertDepartment input[type="submit"], #editDepartment input[type="submit"], #deleteDepartment input[type="submit"] {
+    width: 100px;
+}
+
+
+/*       modal edit locations       */
+
+#locationModal .modal-content .modal-body{
+    height: 195px;
+}
+
+
+#editLocation label, #deleteLocation label {
+    width: 160px;
+}
+
+#insertLocation span, #editLocation span {
+    width: 160px;
+}
+
+#insertLocation input[type="submit"], #editLocation input[type="submit"], #deleteLocation input[type="submit"] {
+    width: 100px;
+}
+
+
+/*responsive*/
+
+  /*sm*/
+  @media only screen and (max-width:767px) {
+
+    /*navigation*/
+    .pageTitle{
+        text-decoration: none;
+        color: white;
+        font-size: 22px;
+    }
+
+    .pageTitleDiv {
+        width: 60%;
+    }
+    
+    #navTools{
+        width: 40%;
+    }
+
+    /*  tools  */
+
+    .formSearchMain {
+        margin-top: 20px;
+    }
+
+    .formSearchMain form {
+        margin: 10px;
+    }
+
+    #toolsDiv .formSearchMain form input {
+        min-width: 20vw;
+        max-width: 200px;
+    }
+
+    .styleFilterTitle {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+    }
+
+    .styleFilterTitle p {
+        width: 15%;
+        margin: auto;
+        font-weight: bold; 
+        font-size: 18px;
+        color: white;
+    }
+
+    .selectForTable{
+        width: 85%;
+    }
+
+    .selectForTable div {
+        margin: 5px auto; 
+    }
+
+    .selectForTable select {
+        font-size: 13px;
+        min-width: 125px;
+        width: 30vw;
+        height: 35px;
+    }
+
+    #toolsDiv div[class*=col-12] {
+        padding: 0;
+    }
+
+    #reset {
+        width: 60px;
+        margin: auto 15px;
+        font-size: 16px;
+    }
+
+    #dropdownMenuMain {
+        padding: 2px;
+        height: 35px;
+        width: 140px;
+    }
+
+
+    /* table */
+
+    #tableDiv{
+        position: absolute;
+        top: 260px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    table td>i{
+        margin-right: 5px;
+    }
+
+    table {
+        font-size: 11px;
+    }
+
+}
+
+   /*md*/
+  @media only screen and (min-width:768px) and (max-width:991px) {
+
+    /*navigation*/
+    .pageTitle{
+        text-decoration: none;
+        color: white;
+        font-size: 24px;
+    }
+
+    .pageTitleDiv {
+        width: 30%;
+    }
+    
+    #navTools{
+        width: 70%;
+    }
+
+    /* tools */
+
+    #toolsDiv {
+        
+    }
+    
+    #mainDiv2 {
+        font-size: 16px;
+    }
+
+    #toolsDiv form {
+        margin-top: 10px;
+    }
+
+    #toolsDiv form input {
+        width: 300px;
+    }
+
+    .styleFilterTitle {
+        height: 70px;
+        text-align: center;
+    }
+
+    .selectForTable {
+        width: 83%;
+    }
+
+    #toolsDiv .selectForTable div {
+        margin: 15px;
+    }
+    
+    #toolsDiv .selectForTable select {
+        width: 170px;
+        
+    }
+
+    .formSearchMain{
+        margin-top: 10px;
+        height: 70px;
+    }
+
+    .formSearchMain form{
+        padding-left: 15px;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    #reset {
+        width: 70px;
+        margin: auto 15px;
+        font-size: 18px;
+    }
+
+    .styleFilterTitle p {
+        width: 17%;
+        margin: auto;
+        padding: 5px;
+        font-weight: bold; 
+        font-size: 20px;
+        color: white;
+        border-radius: 10px;
+    }
+
+
+    /*  table */
+
+    #tableDiv{
+        position: absolute;
+        top: 260px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    table td>i{
+        margin-right: 5px;
+    }
+
+    table button i {
+        font-size: 18px;
+    }
+   
+  }
+   /*lg*/
+  @media only screen and (min-width:992px) {
+
+    /*navigation*/
+    .pageTitle{
+        text-decoration: none;
+        color: white;
+        font-size: 26px;
+    }
+
+    .pageTitleDiv {
+        width: 25%;
+    }
+    
+    #navTools{
+        width: 75%;
+    }
+
+    #dropdownMenuNav{
+        width: 200px;
+    }
+
+    #companynav {
+        border-bottom: none;
+    }
+
+    /* tools */
+
+    #toolsDiv {
+
+        height: 180px;
+        background-color: transparent;
+    }
+
+    .formSearchMain{
+        margin-top: 10px;
+    }
+
+    #toolsDiv .formSearchMain form input {
+        width: 300px;
+    }
+
+
+    #toolsDiv .selectForTable div {
+        margin: 20px;
+    }
+    
+    #toolsDiv .selectForTable select {
+        width: 200px;
+        
+    }
+
+    #reset {
+        width: 70px;
+        margin: auto 15px;
+        font-size: 18px;
+    }
+
+    .styleFilterTitle {
+        
+        height: 70px;
+        text-align: center;
+    }
+
+    .styleFilterTitle p {
+        margin-left: auto;
+        margin: auto;
+        padding: 5px;
+        font-weight: bold; 
+        font-size: 20px;
+        color: white;
+       
+    }
+
+    /*   table   */
+
+    #tableDiv{
+        position: absolute;
+        top: 260px;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+
+    table {
+       
+        font-size: 16px;
+    }
+
+ 
+    table button i {
+        font-size: 22px;
+    }
+
+    table td>i{
+        margin-right: 8px;
+    }
+
+  }

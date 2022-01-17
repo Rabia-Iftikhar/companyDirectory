@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="author" content="Rabia Iftikhar">
+      <meta name="description" content="Mobile-fisrt web app t0 manage database of staff">
+      <meta name="keywords" content="manage, sort staff, comany database">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+      <link href="vendors/bootrtrap/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+      <link href="libs/css/style.css" rel="stylesheet" type="text/css">
+      <link href="img/group.png" rel="icon">
+      <title>Company Directory</title>
+  </head>
+
+  <body class="overflow-hidden">
+
+
+    <div class="container-fluid" id="companynav">
+      <div class="row h-100">
+        <div class="col-12 d-flex p-0">
+
+          <div class="d-flex pageTitleDiv">
+              <a class="my-auto mx-auto pageTitle"  href="">Company Directory</a>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-end" id="navTools">
+  
+            <ul class="navbar-nav mx-4 ">
+              <li class="nav-item dropdown ">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuNav" data-bs-toggle="dropdown" aria-expanded="false">
+                  Settings
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuNav">
+                  <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#locationModal">Locations</button></li>
+                  <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#departmentModal">Departments</button></li>
+                </ul>
+              </li>  
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 d-flex flex-column p-0" id="toolsDiv">
+          <div class="row m-0">
+            <div class="col-12 col d-flex flex-column align-items-start align-items-md-center flex-md-row justify-content-md-center">
+              <form>
+                <div class="input-group">
+                  <label class="input-group-text" for="searchMain"><i class="bi bi-search"></i></label>
+                  <input class="form-control searchInput" onkeyup="searchTable()" id="searchMain" type="text"  placeholder="Search...">
+                </div>
+              </form>
+              <div class="d-flex styleFilterTitle">
+                <p>Filters:</p>
+                <div class="d-flex selectForTable">
+                  <div class="d-flex">
+                    <select class="deparments" id="selectDepartmens"></select>
+                  </div>
+                  <div class="d-flex">
+                    <select class="locations" id="selectLocation"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 d-flex align-items-center formSearchMain">
+              <div class="d-flex mx-4 ms-lg-auto">
+                <button class="btn btn-secondary" id="reset"><i class="bi bi-bootstrap-reboot"></i></button>
+                <button class="btn btn-success btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#insertNewPerson"><i class="bi bi-person-plus"></i></button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="p-0 w-100 overflow-auto" id="tableDiv">
+      
+      <table class="table table-secondary table-striped table-hover table-bordered align-middle m-0">
+
+        <thead>
+
+          <tr>
+            <th><div class="d-flex">Name<i class="ms-auto bi bi-arrows-expand sortTab"></i></div></th>
+            <th><div class="d-flex">Departmnet<i class="ms-auto bi bi-arrows-expand sortTab"></i></div></th>
+            <th><div class="d-flex">Location<i class="ms-auto bi bi-arrows-expand sortTab"></i></div></th>
+            <th><div class="d-flex">Email<i class="ms-auto bi bi-arrows-expand sortTab"></i></div></th>
+            <th class="text-center">Edit</th>
+          </tr>
+          
+        </thead>
+
+        <tbody id="tableBody">
+          
+    
+        </tbody>
+
+      </table>
+
+    </div>
+  
+     
+
+
+
+    <!--location modal-->
+
+    <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="#locationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title headerForModal" id="locationModalLabel">Manage Locations</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="container-fluid">
+              <div classs="row">
+
+                <div class="col-12">
+                  <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="locrad" id="btnradioAddLoc" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary makeLabelWhite" for="btnradioAddLoc">Add Location</label>
+                  
+                    <input type="radio" class="btn-check" name="locrad" id="btnradioEditLoc" autocomplete="off">
+                    <label class="btn btn-outline-secondary makeLabelWhite" for="btnradioEditLoc">Update Location</label>
+                  
+                    <input type="radio" class="btn-check" name="locrad" id="btnradioDeleteLoc" autocomplete="off">
+                    <label class="btn btn-outline-secondary makeLabelWhite" for="btnradioDeleteLoc">Delete Location</label>
+                  </div>
+                </div>
+
+                <div class="col-12 aadLoc">
+                  <form id="insertLocation">
+                    <div class="input-group my-4">
+                      <span class="input-group-text">New Location</span>
+                      <input type="text" class="form-control" name="name" pattern="[a-zA-Z0-9\s]+" title="Only letters and numbers" required />
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-12 editLoc collapse">
+                  <form id="editLocation">
+                    <div class="input-group my-3">
+                      <label class="input-group-text">Locations</label>
+                      <select class="form-select locations"  name="id"></select>
+                    </div>
+                    <div class="input-group my-3">
+                      <span class="input-group-text">New Name</span>
+                      <input type="text" class="form-control" name="name" pattern="[a-zA-Z0-9\s]+" title="Only letters and numbers" required />
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-12 delLoc collapse">
+                  <form id="deleteLocation">
+                    <div class="input-group my-4">
+                      <label class="input-group-text">Location</label>
+                      <select class="form-select locations" name="id" required></select>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary btn-sm modalFooterBtn" data-bs-dismiss="modal"><i class="bi bi-x-circle modalFooterIcon"></i></button>
+
+            <button class="btn btn-success btn-sm modalFooterBtn" id="aadLocBtn" type="submit" form="insertLocation" ><i class="bi bi-check-circle modalFooterIcon"></i></button>
+            
+            <button class="btn btn-success btn-sm d-none modalFooterBtn" id="editLocBtn" type="submit" form="editLocation"><i class="bi bi-check-circle modalFooterIcon"></i></button>
+            
+            <button class="btn btn-danger btn-sm d-none modalFooterBtn" id="delLocBtn" type="submit" form="deleteLocation"><i class="bi bi-check-circle modalFooterIcon"></i></button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!--department modal-->
+
+    <div class="modal fade" id="departmentModal" tabindex="-1" aria-labelledby="#departmentModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title headerForModal" id="departmentModalLabel">Manage Departments</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="container-fluid">
+              <div classs="row">
+
+                <div class="col-12">
+                  <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="deprad" id="btnradioAddDep" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary makeLabelWhite" for="btnradioAddDep">Add Department</label>
+                  
+                    <input type="radio" class="btn-check" name="deprad" id="btnradioEditDep" autocomplete="off">
+                    <label class="btn btn-outline-secondary makeLabelWhite" for="btnradioEditDep">Update Department</label>
+                  
+                    <input type="radio" class="btn-check" name="deprad" id="btnradioDeleteDep" autocomplete="off">
+                    <label class="btn btn-outline-secondary makeLabelWhite" for="btnradioDeleteDep">Delete Department</label>
+                  </div>
+                </div>
+
+                <div class="col-12 aadDep">
+
+                  <form id="insertDepartment">
+                    <div class="input-group my-4">
+                      <span class="input-group-text">New Department</span>
+                      <input type="text" class="form-control" name="name" pattern="[a-zA-Z0-9\s]+" title="Only letters and numbers" required />
+                    </div>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text">Choose Location</label>
+                      <select class="form-select locations" name="locationID" required></select>
+                    </div>
+                  </form>
+
+                </div>
+
+                <div class="col-12 editDep d-none">
+
+                  <form id="editDepartment">
+                    <div class="input-group my-3">
+                      <label class="input-group-text">Departments</label>
+                      <select class="form-select deparments" name="id"></select>
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">New Name</span>
+                      <input type="text" class="form-control" name="name" pattern="[a-zA-Z0-9\s]+" title="Only letters and numbers"  required />
+                    </div>
+                    <div class="input-group my-3">
+                      <label class="input-group-text">New Location</label>
+                      <select class="form-select locations" name="locationID" required></select>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-12 delDep d-none">
+                  <form id="deleteDepartment">
+                    <div class="input-group my-4">
+                      <label class="input-group-text">Departments</label>
+                      <select class="form-select deparments" name="id" required></select>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary btn-sm modalFooterBtn" data-bs-dismiss="modal"><i class="bi bi-x-circle modalFooterIcon"></i></button>
+
+            <button class="btn btn-success btn-sm modalFooterBtn" id="addDepBtn" type="submit" form="insertDepartment" ><i class="bi bi-check-circle modalFooterIcon"></i></button>
+            
+            <button class="btn btn-success btn-sm d-none modalFooterBtn" id="editDepBtn" type="submit" form="editDepartment"><i class="bi bi-check-circle modalFooterIcon"></i></button>
+            
+            <button class="btn btn-danger btn-sm d-none modalFooterBtn" id="delDepBtn" type="submit" form="deleteDepartment"><i class="bi bi-check-circle modalFooterIcon"></i></button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--insert new person modal-->
+
+    <div class="modal fade" id="insertNewPerson" tabindex="-1" aria-labelledby="#insertNewPersonLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title headerForModal" id="insertNewPersonLabel">Add New Person</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <form id="addPerson">
+              <div class="input-group mb-3">
+                <span class="input-group-text">First Name</span>
+                <input type="text" class="form-control" name="firstName" pattern="[a-zA-Z\s]+" title="Only letters" required />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Last Name</span>
+                <input type="text" class="form-control" name="lastName" pattern="[a-zA-Z\s]+" title="Only letters" required />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Job Title</span>
+                <input type="text" class="form-control" name="jobTitle"  placeholder="optional" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Email</span>
+                <input type="email" class="form-control" name="email" required/>
+              </div>
+              <div class="input-group mb-3">
+                <label class="input-group-text">Departments</label>
+                <select class="form-select deparments" name="departmentID" required></select>
+              </div> 
+            </form>
+
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary btn-sm modalFooterBtn" data-bs-dismiss="modal"><i class="bi bi-x-circle modalFooterIcon"></i></button>
+            
+            <button type="submit" class="btn btn-success btn-sm modalFooterBtn" form="addPerson"><i class="bi bi-check-circle modalFooterIcon"></i></button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--edit existing person modal-->
+
+    <div class="modal fade" id="updatePerson" tabindex="-1" aria-labelledby="#updatePersonLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title headerForModal" id="updatePersonLabel">Change details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <form id="editPerson">
+              <div class="input-group mb-3">
+                <span class="input-group-text">First Name</span>
+                <input type="text" class="form-control" name="firstName" pattern="[a-zA-Z\s]+" title="Only letters" required  />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Last Name</span>
+                <input type="text" class="form-control" name="lastName" pattern="[a-zA-Z\s]+" title="Only letters" required />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Job Title</span>
+                <input type="text" class="form-control" name="jobTitle" pattern="[a-zA-Z\s]+" title="Only letters"  placeholder="optional" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Email</span>
+                <input type="email" class="form-control" name="email" required/>
+              </div>
+              <div class="input-group mb-3">
+                <label class="input-group-text">Departments</label>
+                <select class="form-select deparments" name="departmentID" required></select>
+              </div>
+            </form>  
+            
+          </div>
+          <div class="modal-footer">
+            
+            <button type="button" class="btn btn-secondary btn-sm modalFooterBtn" data-bs-dismiss="modal"><i class="bi bi-x-circle modalFooterIcon"></i></button>
+            
+            <button type="submit" class="btn btn-success btn-sm modalFooterBtn" form="editPerson"><i class="bi bi-check-circle modalFooterIcon"></i></button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <!--The preloader data-->
+      <div id="preloader">
+        <div id="loader"></div>
+      </div>
+
+       <!--Back to top-->
+      <button type="button" class="btn btn-danger btn-floating btn-lg" id="scrollBack">
+        <i class="bi bi-arrow-up"></i>
+      </button>
+
+      <script src="vendors/jquery/jquery-3.5.1.min.js"></script>
+      <script src="vendors/bootrtrap/js/bootstrap.bundle.min.js"></script>
+      <script src="vendors/bootbox/bootbox.min.js"></script>
+      <script src="libs/js/pageFunctionality.js"></script>
+      <script src="libs/js/script.js"></script>
+
+  </body>
+
+</html>
